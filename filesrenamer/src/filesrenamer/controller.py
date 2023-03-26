@@ -18,7 +18,7 @@ class RenameFiles():
         if os.path.exists(str(folder_path)) and os.path.isdir(str(folder_path)):
             self.folder_path = str(folder_path)
             self.get_folder_content()
-            self.list_files()
+            # self.list_and_rename_files()
         else:
             print('not a valid folder')
 
@@ -40,12 +40,16 @@ class RenameFiles():
             print('Error in the file\'s modification date : not a valid timestamp')
             return ''
 
-    def list_files(self):
-        for f in self.files:
-            print(f, self.timestamp_to_datetime(f'{self.folder_path}/{f}'))
+    def list_and_rename_files(self):
+        # list all files in choosen directory and rename them with FORMAT date at the beginning
+        output = []
 
+        for filename in self.files:
+            dt           = self.timestamp_to_datetime(f'{self.folder_path}/{filename}')
+            new_filename = f"{dt}_{filename}"
+            print(new_filename)
+            output.append(new_filename)
+            # os.rename(f'{self.folder_path}/{filename}', f'{self.folder_path}/{new_filename}')
+            # output.append(f'{self.folder_path}/{new_filename}')
 
-folder_path = input('Enter path of target directory : ')
-
-# usage
-RenameFiles(folder_path)
+        return output
