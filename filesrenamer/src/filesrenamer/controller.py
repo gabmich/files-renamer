@@ -52,6 +52,6 @@ class RenameFiles():
                 os.rename(f'{self.folder_path}/{filename}', f'{self.folder_path}/{new_filename}')
                 output.append(f'{new_filename} => renamed')
                 continue
-            output.append(f'{new_filename} => not renamed')
+            output.append(f'{filename} => not renamed')
 
         return output
