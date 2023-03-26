@@ -47,9 +47,11 @@ class RenameFiles():
         for filename in self.files:
             dt           = self.timestamp_to_datetime(f'{self.folder_path}/{filename}')
             new_filename = f"{dt}_{filename}"
-            print(new_filename)
-            output.append(new_filename)
-            # os.rename(f'{self.folder_path}/{filename}', f'{self.folder_path}/{new_filename}')
-            # output.append(f'{self.folder_path}/{new_filename}')
+
+            if not filename.startswith(dt):
+                os.rename(f'{self.folder_path}/{filename}', f'{self.folder_path}/{new_filename}')
+                output.append(f'{new_filename} => renamed')
+                continue
+            output.append(f'{new_filename} => not renamed')
 
         return output
